@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralKata", "RomanNumeralKata\RomanNumeralKata.csproj", "{0B979706-6CE3-4585-B63D-7BF908A491CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralTests", "RomanNumeralTests\RomanNumeralTests.csproj", "{B1877EC4-4FBC-49C1-8150-85BF75586FD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B979706-6CE3-4585-B63D-7BF908A491CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B979706-6CE3-4585-B63D-7BF908A491CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B979706-6CE3-4585-B63D-7BF908A491CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B979706-6CE3-4585-B63D-7BF908A491CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1877EC4-4FBC-49C1-8150-85BF75586FD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1877EC4-4FBC-49C1-8150-85BF75586FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1877EC4-4FBC-49C1-8150-85BF75586FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1877EC4-4FBC-49C1-8150-85BF75586FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
