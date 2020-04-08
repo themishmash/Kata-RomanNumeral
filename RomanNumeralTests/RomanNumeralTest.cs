@@ -50,10 +50,22 @@ namespace RomanNumeralTests
             Assert.AreEqual("I", romanNumeral.TranslateIntToRomanNumeral(1));
             Assert.AreEqual("II", romanNumeral.TranslateIntToRomanNumeral(2));
             Assert.AreEqual("III", romanNumeral.TranslateIntToRomanNumeral(3));
-            
+        }
+        
+        [Test]
+        public void RomanNumeral_input_4_returnsRomanNumeral_IV()
+        {
+            //Given (class we need to create)
+            RomanNumeral romanNumeral = new RomanNumeral();
+
+            //When
+            //string result = romanNumeral.TranslateIntToRomanNumeral(1);
+
+            //Then
+            Assert.AreEqual("IV", romanNumeral.TranslateIntToRomanNumeral(4));
            
         }
-
+        
         [Test]
         public void RomanNumeral_Input_5_returns_V()
         {
