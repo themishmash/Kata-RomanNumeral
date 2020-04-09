@@ -5,10 +5,19 @@ namespace RomanNumeralKata
         public string TranslateIntToRomanNumeral(int number)
         {
             string numeralOutput = "";
-            int modulusRemainder = 0;
+            int modulusRemainder;
+            
+            // Set up symbol and values data structure. Then change IV and IX conditionals to be a resuable method. 
+            
             if (number + 1 == 5)
             {
                 numeralOutput = "IV";
+                return numeralOutput;
+            }
+            
+            if (number + 1 == 10)
+            {
+                numeralOutput = "IX";
                 return numeralOutput;
             }
             
@@ -21,8 +30,7 @@ namespace RomanNumeralKata
                 }
                 return numeralOutput;
             }
-
-
+            
             if (number >= 5 && number < 10)
             {
                 numeralOutput = "V";
