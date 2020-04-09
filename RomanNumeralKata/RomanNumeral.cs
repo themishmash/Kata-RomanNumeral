@@ -6,18 +6,35 @@ namespace RomanNumeralKata
         {
             if (number == 1)
             {
-                return "I";
+                numeralOutput = "IV";
+                return numeralOutput;
             }
-
-            if (number == 2)
+            
+            if (number < 5)
             {
-                return "II";
+                int modulusRemainder = number % 5;
+                for (int i = 0; i < modulusRemainder; i++)
+                {
+                    numeralOutput += "I";
+                }
+                return numeralOutput;
             }
-
-            if (number == 3)
-            {
-                return "III";
-            }
+            
+            
+            // if (number == 1)
+            // {
+            //     return "I";
+            // }
+            //
+            // if (number == 2)
+            // {
+            //     return "II";
+            // }
+            //
+            // if (number == 3)
+            // {
+            //     return "III";
+            // }
 
             if (number == 5)
             {
