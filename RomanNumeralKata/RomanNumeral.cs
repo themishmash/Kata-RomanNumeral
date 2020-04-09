@@ -4,7 +4,9 @@ namespace RomanNumeralKata
     {
         public string TranslateIntToRomanNumeral(int number)
         {
-            if (number == 1)
+            string numeralOutput = "";
+            int modulusRemainder = 0;
+            if (number + 1 == 5)
             {
                 numeralOutput = "IV";
                 return numeralOutput;
@@ -12,35 +14,31 @@ namespace RomanNumeralKata
             
             if (number < 5)
             {
-                int modulusRemainder = number % 5;
+                modulusRemainder = number % 5;
                 for (int i = 0; i < modulusRemainder; i++)
                 {
                     numeralOutput += "I";
                 }
                 return numeralOutput;
             }
-            
-            
-            // if (number == 1)
-            // {
-            //     return "I";
-            // }
-            //
-            // if (number == 2)
-            // {
-            //     return "II";
-            // }
-            //
-            // if (number == 3)
-            // {
-            //     return "III";
-            // }
 
-            if (number == 5)
+
+            if (number >= 5 && number < 10)
             {
-                return "V";
-            }
+                numeralOutput = "V";
+                modulusRemainder = number % 5;
+                for (int i = 0; i < modulusRemainder; i++)
+                {
+                    numeralOutput += "I";
+                }
 
+                return numeralOutput;
+            }
+            
+            
+            
+            
+            
             if (number == 10)
             {
                 return "X";
