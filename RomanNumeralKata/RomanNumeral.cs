@@ -1,11 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Channels;
+
 namespace RomanNumeralKata
 {
     public class RomanNumeral
     {
+        private static Dictionary<string, int> symbolValues = CreateNumeralsAndValues();
         public string TranslateIntToRomanNumeral(int number)
         {
             string numeralOutput = "";
             int modulusRemainder;
+            
+            var symbol = findRomanNumeralFromValue(5);
             
             // Set up symbol and values data structure. Then change IV and IX conditionals to be a resuable method. 
             
@@ -20,6 +28,7 @@ namespace RomanNumeralKata
                 numeralOutput = "IX";
                 return numeralOutput;
             }
+           
             
             if (number < 5)
             {
@@ -44,9 +53,6 @@ namespace RomanNumeralKata
             }
             
             
-            
-            
-            
             if (number == 10)
             {
                 return "X";
@@ -54,6 +60,26 @@ namespace RomanNumeralKata
 
             return null;
         }
+
+        private static Dictionary<string, int>CreateNumeralsAndValues()
+        {
+            Dictionary<string, int> numeralValues = new Dictionary<string, int>();
+            numeralValues.Add("I", 1);
+            numeralValues.Add("V", 5);
+            numeralValues.Add("X", 10);
+            numeralValues.Add("L", 50);
+            numeralValues.Add("C", 100);
+            numeralValues.Add("D", 500);
+            numeralValues.Add("M", 1000);
+            return numeralValues;
+        }
+        public string findRomanNumeralFromValue(int value)
+        {
+            return symbolValues.FirstOrDefault(x => x.Value == value).Key;
+        }
+        // public string findValueFromRomanNumeral(string value)
+        // {
+        // }
     }
 }
 
