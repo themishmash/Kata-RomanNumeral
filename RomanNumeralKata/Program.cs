@@ -6,7 +6,9 @@ namespace RomanNumeralKata
     {
         static void Main(string[] args)
         {
-           
+           RomanNumeral romanNumeral = new RomanNumeral();
+
+           //romanNumeral.findRomanValueFromInput();
         }
     }
 }

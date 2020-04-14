@@ -8,31 +8,28 @@ namespace RomanNumeralKata
     public class RomanNumeral
     {
         private static Dictionary<string, int> symbolValues = CreateNumeralsAndValues();
-        public string TranslateIntToRomanNumeral(int number)
+        
+        public string TranslateIntToRomanNumeral(int inputNumber)
         {
             string numeralOutput = "";
             int modulusRemainder;
             
-            var symbol = findRomanNumeralFromValue(5);
             
-            // Set up symbol and values data structure. Then change IV and IX conditionals to be a resuable method. 
-            
-            if (number + 1 == 5)
+            //TODO Tricky thing to do: loop through conditionals and not to hardcode the numbers like 5, 10, etc
+            if (inputNumber + 1 == 5) //symbolValues[5]
             {
-                numeralOutput = "IV";
-                return numeralOutput;
+                return setRomanNumeralForOneLessThanSymbol(inputNumber, numeralOutput);
             }
             
-            if (number + 1 == 10)
+            if (inputNumber + 1 == 10)
             {
-                numeralOutput = "IX";
-                return numeralOutput;
+                return setRomanNumeralForOneLessThanSymbol(inputNumber, numeralOutput);
             }
            
-            
-            if (number < 5)
+            //TODO put the modulus remainder items etc into its own function
+            if (inputNumber < 5)
             {
-                modulusRemainder = number % 5;
+                modulusRemainder = inputNumber % 5;
                 for (int i = 0; i < modulusRemainder; i++)
                 {
                     numeralOutput += "I";
@@ -40,10 +37,10 @@ namespace RomanNumeralKata
                 return numeralOutput;
             }
             
-            if (number >= 5 && number < 10)
+            if (inputNumber >= 5 && inputNumber < 10)
             {
                 numeralOutput = "V";
-                modulusRemainder = number % 5;
+                modulusRemainder = inputNumber % 5;
                 for (int i = 0; i < modulusRemainder; i++)
                 {
                     numeralOutput += "I";
@@ -53,7 +50,8 @@ namespace RomanNumeralKata
             }
             
             
-            if (number == 10)
+            //TODO EASY FUNCTION TO CREATE. Need to reference the key and value again - see setRomanNumeral for guidance
+            if (inputNumber == 10)
             {
                 return "X";
             }
@@ -72,6 +70,19 @@ namespace RomanNumeralKata
             numeralValues.Add("D", 500);
             numeralValues.Add("M", 1000);
             return numeralValues;
+        }
+
+        public string setRomanNumeralForOneLessThanSymbol(int inputNumber, string numeralOutput)
+        {
+            foreach (KeyValuePair<string, int> dictionaryEntry in symbolValues)
+                
+                if (inputNumber + 1 == dictionaryEntry.Value)
+                {
+                    numeralOutput = "I" + dictionaryEntry.Key; 
+                    return numeralOutput;
+                }
+
+            return "";
         }
         public string findRomanNumeralFromValue(int value)
         {
