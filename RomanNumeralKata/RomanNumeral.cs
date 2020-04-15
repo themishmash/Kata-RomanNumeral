@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Channels;
 
@@ -10,7 +11,6 @@ namespace RomanNumeralKata
         public Dictionary<string, int>RomanNumeralDictionary 
         = new Dictionary<string, int>
         {
-           
             {"I", 1},
             {"V", 5},
             {"X", 10},
@@ -18,67 +18,53 @@ namespace RomanNumeralKata
             {"C", 100},
             {"D", 500},
             {"M", 1000}
-           
         };
+        
         public string TranslateIntToRomanNumeral(int inputNumber)
         {
-            string romanOutput = "";
-            int modulusRemainder;
-            
-            
-            //TODO Tricky thing to do: loop through conditionals and not to hardcode the numbers like 5, 10, etc
-
-           
-            if (inputNumber + 1 == findMatchingRomanNumeral(inputNumber)) //symbolValues[5]
+            string romanOutput;
+            if (inputNumber == GetDictionaryValueMinusOne(inputNumber) - 1)
             {
-                return setRomanNumeralForOneLessThanSymbol(inputNumber);
-                
-            }
-            
-            
-            
-            // if (inputNumber + 1 == 5) //symbolValues[5]
-            // {
-            //     return setRomanNumeralForOneLessThanSymbol(inputNumber);
-            // }
-            
-            // if (inputNumber + 1 == 10)
-            // {
-            //     return setRomanNumeralForOneLessThanSymbol(inputNumber);
-            // }
-           
-            //TODO put the modulus remainder items etc into its own function
-            if (inputNumber < 5 && inputNumber + 1 != findMatchingRomanNumeral(inputNumber))
-            {
-                modulusRemainder = inputNumber % 5;
-                for (int i = 0; i < modulusRemainder; i++)
-                {
-                    romanOutput += "I";
-                }
+                romanOutput = SetRomanNumeralForValueMinusOne(inputNumber);
                 return romanOutput;
             }
-            
-            if (inputNumber >= 5 && inputNumber < 10)
+            if (inputNumber < 5)
             {
-                romanOutput = "V";
-                modulusRemainder = inputNumber % 5;
-                for (int i = 0; i < modulusRemainder; i++)
-                {
-                    romanOutput += "I";
-                }
-
+                romanOutput = SetRomanNumeralForUnder5(inputNumber);
                 return romanOutput;
             }
-            
-            
-            romanOutput = checkIfInputNumberMatchesRomanNumeral(inputNumber);
-
+            if (inputNumber > 5 && inputNumber < 10)
+            {
+                romanOutput = SetRomanNumeralBetween5And10(inputNumber);
+                return romanOutput;
+            }
+            romanOutput = FindRomanNumeralFromInput(inputNumber);
             return romanOutput;
         }
 
-       
+        private static string SetRomanNumeralBetween5And10(int inputNumber)
+        {
+            string romanOutput = "V";
+            int modulusRemainder = inputNumber % 5;
+            for (int i = 0; i < modulusRemainder; i++)
+            {
+                romanOutput += "I";
+            }
+            return romanOutput;
+        }
 
-        public string setRomanNumeralForOneLessThanSymbol(int inputNumber)
+        private static string SetRomanNumeralForUnder5(int inputNumber)
+        {
+            var modulusRemainder = inputNumber % 5;
+            string romanOutput = "";
+            for (int i = 0; i < modulusRemainder; i++)
+            {
+                romanOutput += "I";
+            }
+            return romanOutput;
+        }
+
+        private string SetRomanNumeralForValueMinusOne(int inputNumber)
         {
             foreach (KeyValuePair<string, int> dictionaryEntry in RomanNumeralDictionary)
                 
@@ -91,30 +77,12 @@ namespace RomanNumeralKata
 
             return "";
         }
-
-        // public string findMatchingInputNumberForOneLessThanSymbol()
-        // {
-        //     
-        // }
         
-        
-
-        public string checkIfInputNumberMatchesRomanNumeral(int inputNumber)
+        private int GetDictionaryValueMinusOne(int inputNumber)
         {
             foreach (KeyValuePair<string, int> dictionaryEntry in RomanNumeralDictionary)
                 
-                if (inputNumber == dictionaryEntry.Value)
-                {
-                    return dictionaryEntry.Key;
-                }
-            return "";
-        }
-
-        public int findMatchingRomanNumeral(int inputNumber)
-        {
-            foreach (KeyValuePair<string, int> dictionaryEntry in RomanNumeralDictionary)
-                
-                if (inputNumber == dictionaryEntry.Value)
+                if (inputNumber == dictionaryEntry.Value - 1)
                 {
                     return dictionaryEntry.Value;
                 }
@@ -122,19 +90,28 @@ namespace RomanNumeralKata
         }
         
         
-      
-       
-        
-        
-        
-        
-        
-        //Maybe can delete this later on
-        public string findRomanNumeralFromValue(int value)
+        public string FindRomanNumeralFromInput(int inputNumber)
         {
-            return RomanNumeralDictionary.FirstOrDefault(x => x.Value == value).Key;
+            return RomanNumeralDictionary.FirstOrDefault(x => x.Value == inputNumber).Key;
+        }
+        
+        // FINDS MATCHING VALUE FROM THE LIST. IF NO MATCH RETURNS 0. TO BE USED FOR > 10. 
+        public int FindDictionaryValueFromInput(int inputNumber)
+        {
+            return RomanNumeralDictionary.FirstOrDefault(x => x.Value == inputNumber).Value;
         }
       
+        // IMPERATIVE WAY?? DOING THE SAME AS FindRomanNumeralFromValue(). 
+        // private string GetRomanNumeralForMatchingInput(int inputNumber)
+        // {
+        //     foreach (KeyValuePair<string, int> dictionaryEntry in RomanNumeralDictionary)
+        //         
+        //         if (inputNumber == dictionaryEntry.Value)
+        //         {
+        //             return dictionaryEntry.Key;
+        //         }
+        //     return "";
+        // }
     }
 }
 

@@ -7,8 +7,10 @@ namespace RomanNumeralKata
         static void Main(string[] args)
         {
            RomanNumeral romanNumeral = new RomanNumeral();
-
-           //romanNumeral.findRomanValueFromInput();
+           var list = romanNumeral.FindDictionaryValueFromInput(45);
+           
+            Console.WriteLine(list);
+           
         }
     }
 }
