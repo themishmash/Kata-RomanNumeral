@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Channels;
+using System.Threading.Tasks.Sources;
 
 namespace RomanNumeralKata
 {
@@ -23,21 +24,35 @@ namespace RomanNumeralKata
         public string TranslateIntToRomanNumeral(int inputNumber)
         {
             string romanOutput;
-            if (inputNumber == GetDictionaryValueMinusOne(inputNumber) - 1)
+            int digit = 1;
+            int tens = 10;
+            
+            if (inputNumber.ToString().Length == 2)
             {
-                romanOutput = SetRomanNumeralForValueMinusOne(inputNumber);
-                return romanOutput;
+                var firstNumber = inputNumber.ToString()[0];
+                var secondNumber = inputNumber.ToString()[1];
+                var receivedOnes = Convert.ToInt16(firstNumber) * digit;
+                var receivedTens = Convert.ToInt16(firstNumber) * tens;
             }
-            if (inputNumber < 5)
+            else
             {
-                romanOutput = SetRomanNumeralForUnder5(inputNumber);
-                return romanOutput;
+                if (inputNumber == GetDictionaryValueMinusOne(inputNumber) - 1)
+                {
+                    romanOutput = SetRomanNumeralForValueMinusOne(inputNumber);
+                    return romanOutput;
+                }
+                if (inputNumber < 5)
+                {
+                    romanOutput = SetRomanNumeralForUnder5(inputNumber);
+                    return romanOutput;
+                }
+                if (inputNumber > 5 && inputNumber < 10)
+                {
+                    romanOutput = SetRomanNumeralBetween5And10(inputNumber);
+                    return romanOutput;
+                }
             }
-            if (inputNumber > 5 && inputNumber < 10)
-            {
-                romanOutput = SetRomanNumeralBetween5And10(inputNumber);
-                return romanOutput;
-            }
+            
             romanOutput = FindRomanNumeralFromInput(inputNumber);
             return romanOutput;
         }

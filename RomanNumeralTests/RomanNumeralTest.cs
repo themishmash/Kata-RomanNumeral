@@ -82,5 +82,15 @@ namespace RomanNumeralTests
             // Then
             Assert.AreEqual("X", result);
         }
+
+        [Test]
+        public void RomanNumeral_Input_11_Returns_XI()
+        {
+            // Given
+            RomanNumeral romanNumeral = new RomanNumeral();
+            string result = romanNumeral.TranslateIntToRomanNumeral(11);
+            // Then
+            Assert.AreEqual("XI", result);
+        }
     }
 }
