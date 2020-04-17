@@ -92,5 +92,45 @@ namespace RomanNumeralTests
             // Then
             Assert.AreEqual("XI", result);
         }
+        
+        [Test]
+        public void RomanNumeral_Input_13_Returns_XIII()
+        {
+            // Given
+            RomanNumeral romanNumeral = new RomanNumeral();
+            string result = romanNumeral.TranslateIntToRomanNumeral(13);
+            // Then
+            Assert.AreEqual("XIII", result);
+        }
+        
+        [Test]
+        public void RomanNumeral_Input_19_Returns_XIX()
+        {
+            // Given
+            RomanNumeral romanNumeral = new RomanNumeral();
+            string result = romanNumeral.TranslateIntToRomanNumeral(19);
+            // Then
+            Assert.AreEqual("XIX", result);
+        }
+        
+        [Test]
+        public void RomanNumeral_Input_37_Returns_XXXVII()
+        {
+            // Given
+            RomanNumeral romanNumeral = new RomanNumeral();
+            string result = romanNumeral.TranslateIntToRomanNumeral(37);
+            // Then
+            Assert.AreEqual("XXXVII", result);
+        }
+        
+        [Test]
+        public void RomanNumeral_Input_42_Returns_XLII()
+        {
+            // Given
+            RomanNumeral romanNumeral = new RomanNumeral();
+            string result = romanNumeral.TranslateIntToRomanNumeral(42);
+            // Then
+            Assert.AreEqual("XLII", result);
+        }
     }
 }
