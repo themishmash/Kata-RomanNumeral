@@ -74,8 +74,8 @@ namespace RomanNumeralKata
         
         private string CreateTens(List<int> digits)
         {
-            string romanOutput = "";
-            if (digits[digits.Count - 2] == GetDictionaryValueMinusTen(digits[digits.Count - 2]) - 1)
+            string romanOutput = ""; //need to add *10 to below to equal 50
+            if ((digits[digits.Count - 2]) == GetDictionaryValueMinusTen((digits[digits.Count - 2])-10)/10)
             {
                 romanOutput = SetRomanNumeralForValueMinusTen(digits[digits.Count - 2]);
                 return romanOutput;
@@ -201,11 +201,12 @@ namespace RomanNumeralKata
         
         private string SetRomanNumeralForValueMinusTen(int inputNumber)
         {
+            int tens = inputNumber * 10;
             foreach (KeyValuePair<string, int> dictionaryEntry in RomanNumeralDictionary)
                 
-                if (inputNumber + 1 == dictionaryEntry.Value)
+                if (tens + 10 == dictionaryEntry.Value)
+               
                 {
-                    
                     string romanOutput = "X" + dictionaryEntry.Key; 
                     return romanOutput;
                 }
@@ -215,9 +216,10 @@ namespace RomanNumeralKata
         
         private int GetDictionaryValueMinusTen(int inputNumber)
         {
+            int tens = inputNumber * 10;
             foreach (KeyValuePair<string, int> dictionaryEntry in RomanNumeralDictionary)
                 
-                if (inputNumber == dictionaryEntry.Value - 10)
+                if (tens == dictionaryEntry.Value - 10)
                 {
                     return dictionaryEntry.Value;
                 }
