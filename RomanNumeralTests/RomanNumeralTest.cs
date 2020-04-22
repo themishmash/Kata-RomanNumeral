@@ -118,7 +118,7 @@ namespace RomanNumeralTests
         {
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
-            string result = romanNumeral.TranslateIntToRomanNumeral(37);
+            string result = romanNumeral.TranslateIntToRomanNumeral(626); // REMOVE 12
             // Then
             Assert.AreEqual("XXXVII", result);
         }

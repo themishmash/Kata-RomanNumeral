@@ -34,17 +34,7 @@ namespace RomanNumeralKata
             }
 
             var digits = ConvertInputToSeparateDigits(inputNumber);
-
-            if (digits.Count == 1)
-            {
-                romanOutput = CreateUnits(digits);
-            }
-
-            if (digits.Count == 2)
-            {
-                romanOutput = $"{CreateTens(digits)}{CreateUnits(digits)}";
-            }
-
+            
             return romanOutput;
         }
 
@@ -94,37 +84,28 @@ namespace RomanNumeralKata
             return romanOutput;
         }
         
-        private List<int> ConvertInputToSeparateDigits(int input)
+        private Dictionary<string, int> ConvertInputToSeparateDigits(int input)
         {
+            Dictionary<string, int> digitPlaceValues = new Dictionary<string, int>
+            {
+                {"Ones", 0},
+                {"Tens", 0},
+                {"Hundreds", 0},
+                {"Thousands", 0},
+            };
             var lengthOfInput = input.ToString().Length;
-            List<int> digits = new List<int>();
-            int units = 0;
-            int tens = 0;
-            int hundreds = 0;
-            int thousands = 0;
 
-            if (lengthOfInput == 1)
-            {
-                units = input % 10;
-                digits.Add(units);
-            }
-            else if (lengthOfInput == 2)
-            {
-                units = input % 10;
-                tens = ((input - units) / 10) % 10;
-                digits.Add(tens);
-                digits.Add(units);
-            }
-            else if (lengthOfInput == 3)
-            {
-                units = input % 10;
-                tens = ((input - units) / 10) % 10;
-                hundreds = ((input - (units + (tens * 10))) / 100) % 10;
-                digits.Add(hundreds);
-                digits.Add(tens);
-                digits.Add(units);
-            }
-            return digits;
+            int units = (input / 1) % 10;
+            int tens = (input / 10) % 10;
+            int hundreds = (input / 100) % 10;
+            int thousands = (input / 1000) % 10;
+           
+            digitPlaceValues["Ones"] = units;
+            digitPlaceValues["Tens"] = tens;
+            digitPlaceValues["Hundreds"] = hundreds;
+            digitPlaceValues["Thousands"] = thousands;
+            
+            return digitPlaceValues;
         }
         
         private static string SetRomanNumeralBetween5And10(int inputNumber)
