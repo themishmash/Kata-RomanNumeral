@@ -23,6 +23,26 @@ namespace RomanNumeralTests
             Assert.AreEqual("III", romanNumeral.TranslateIntToRomanNumeral(3));
         }
         
+        [Test]
+        public void RomanNumeral_input_22_returnsRomanNumeral_XXII()
+        {
+            //Given (class we need to create)
+            RomanNumeral romanNumeral = new RomanNumeral();
+
+            //Then
+            Assert.AreEqual("XXII", romanNumeral.TranslateIntToRomanNumeral(22));
+        }
+        
+        [Test]
+        public void RomanNumeral_input_237_returnsRomanNumeral_CCXXXVII()
+        {
+            //Given (class we need to create)
+            RomanNumeral romanNumeral = new RomanNumeral();
+
+            //Then
+            Assert.AreEqual("CCXXXVII", romanNumeral.TranslateIntToRomanNumeral(237));
+        }
+        
         // [Test]
         // public void RomanNumeral_input_4_returnsRomanNumeral_IV()
         // {

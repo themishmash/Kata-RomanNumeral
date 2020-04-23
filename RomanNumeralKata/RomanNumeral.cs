@@ -23,63 +23,67 @@ namespace RomanNumeralKata
         private Dictionary<string, int> digitPlaceValues = new Dictionary<string, int>
         {
             {"Ones", 0},
-            {"Tens", 0},
+            {"Tens", 0}, 
             {"Hundreds", 0},
             {"Thousands", 0},
         };
+        
+        
 
         public string TranslateIntToRomanNumeral(int inputNumber)
         {
-            //List<string> romanOutput = new List<string>();
-            string romanOutput = "";
+            List<string> romanOutput = new List<string>();
             
             SeparatingInputToPlaceValues(inputNumber);
 
-            romanOutput = SetRomanNumeralForRegularNumbers(digitPlaceValues["Ones"]);
-            
-            // romanOutput.Add(SetRomanNumeralForRegularNumbers(digitPlaceValues["Ones"]));
-            // romanOutput.Add(SetRomanNumeralForRegularNumbers(digitPlaceValues["Tens"]));
-            // romanOutput.Add(SetRomanNumeralForRegularNumbers(digitPlaceValues["Hundreds"]));
-            
-            
-            
-            
-            // foreach (var key in digitPlaceValues.Keys)
-            //     foreach (var item in RomanNumeralDictionary.Keys)
-            // {
-            //     if (key == "Ones")
-            //     {
-            //         Console.WriteLine(item);
-            //         //Call a function
-            //     }
-            // }
-    
-            return romanOutput;
+            foreach (var digitPlaceValue in digitPlaceValues)
+            {
+                romanOutput.Add(SetRomanNumeralForRegularNumbers(digitPlaceValue));
+            }
+
+            romanOutput.Reverse();
+            var symbolOutput = String.Join("", romanOutput);
+            return symbolOutput;
         }
         
-        private string SetRomanNumeralForRegularNumbers(int numberToProcess)
+        private string SetRomanNumeralForRegularNumbers(KeyValuePair<string, int> numberEntry)
         {
-            var digitPlaceValueKey = digitPlaceValues.FirstOrDefault(x => x.Key == "Ones").Key;
-            var nearestSymbol = 0;
-            var romanDictionaryKey = "";
+            var midPointSymbol = 5;
+            var romanDictionaryKey = "V";
+            var unitSymbol = "I";
 
-            if (digitPlaceValueKey == "Ones")
+            if (numberEntry.Key == "Tens")
             {
-                nearestSymbol = 5;
-                romanDictionaryKey = RomanNumeralDictionary.FirstOrDefault(x => x.Value == nearestSymbol).Key;
+                midPointSymbol = 50;
+                romanDictionaryKey = "L";
+                unitSymbol = "X";
+            }
+            else if (numberEntry.Key == "Hundreds")
+            {
+                midPointSymbol = 500;
+                romanDictionaryKey = "D";
+                unitSymbol = "C";
             }
             
+            var romanOutput = GenerateRomanOutput(numberEntry, midPointSymbol, romanDictionaryKey, unitSymbol);
+            return romanOutput;
+        }
+
+        private static string GenerateRomanOutput(KeyValuePair<string, int> numberEntry, int midPointSymbol, string romanDictionaryKey,
+            string unitSymbol)
+        {
             string romanOutput = "";
-            var modulusRemainder = numberToProcess % nearestSymbol;
-            if (numberToProcess > nearestSymbol)
+            var modulusRemainder = numberEntry.Value % midPointSymbol;
+            if (numberEntry.Value > midPointSymbol)
             {
                 romanOutput = romanDictionaryKey;
             }
 
             for (int i = 0; i < modulusRemainder; i++)
             {
-                romanOutput += "I";
+                romanOutput += unitSymbol;
             }
+
             return romanOutput;
         }
 
