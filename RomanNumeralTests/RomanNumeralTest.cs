@@ -152,5 +152,25 @@ namespace RomanNumeralTests
             // Then
             Assert.AreEqual("XLII", result);
         }
+        
+        [Test]
+        public void RomanNumeral_Input_986_Returns_CMLXXXVI()
+        {
+            // Given
+            RomanNumeral romanNumeral = new RomanNumeral();
+            string result = romanNumeral.TranslateIntToRomanNumeral(986);
+            // Then
+            Assert.AreEqual("CMLXXXVI", result);
+        }
+        
+        [Test]
+        public void RomanNumeral_Input_1404_Returns_MCDIV()
+        {
+            // Given
+            RomanNumeral romanNumeral = new RomanNumeral();
+            string result = romanNumeral.TranslateIntToRomanNumeral(1404);
+            // Then
+            Assert.AreEqual("MCDIV", result);
+        }
     }
 }
