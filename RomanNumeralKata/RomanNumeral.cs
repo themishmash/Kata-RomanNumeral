@@ -8,7 +8,7 @@ namespace RomanNumeralKata
 {
     public class RomanNumeral
     {
-        private Dictionary<string, int>RomanNumeralDictionary 
+        private Dictionary<string, int> RomanNumeralDictionary 
         = new Dictionary<string, int>
         {
             {"I", 1},
@@ -26,22 +26,13 @@ namespace RomanNumeralKata
             {"M", 1000},
            
         };
-        
-        private Dictionary<string, int> digitPlaceValues = new Dictionary<string, int>
-        {
-            {"Ones", 0},
-            {"Tens", 0}, 
-            {"Hundreds", 0},
-            {"Thousands", 0},
-        };
-        
+     
         public string TranslateIntToRomanNumeral(int inputNumber)
         {
 
             List<string> romanOutput = new List<string>();
+            var digitPlaceValues = SeparatingInputToPlaceValues(inputNumber);
             
-            SeparatingInputToPlaceValues(inputNumber);
-           
             foreach (var digitPlaceValue in digitPlaceValues)
             {
                 if (InputMatchesNumeral(digitPlaceValue.Value))
@@ -52,7 +43,6 @@ namespace RomanNumeralKata
                 {
                     romanOutput.Add(SetRomanNumeralForRegularNumbers(digitPlaceValue));
                 }
-                
             }
 
             romanOutput.Reverse();
@@ -111,16 +101,14 @@ namespace RomanNumeralKata
         }
         
 
-        private void SeparatingInputToPlaceValues(int inputNumber)
+        private Dictionary<string, int> SeparatingInputToPlaceValues(int inputNumber)
         {
-            int ones = (inputNumber / 1) % 10;
-            int tens = (inputNumber / 10) % 10;
-            int hundreds = (inputNumber / 100) % 10;
-            int thousands = (inputNumber / 1000) % 10;
-            digitPlaceValues["Ones"] = ones;
-            digitPlaceValues["Tens"] = tens * 10;
-            digitPlaceValues["Hundreds"] = hundreds * 100;
-            digitPlaceValues["Thousands"] = thousands * 1000;
+            var digitPlaceValues = new Dictionary<string, int>();
+            digitPlaceValues["Ones"] = (inputNumber / 1) % 10;
+            digitPlaceValues["Tens"] = ((inputNumber / 10) % 10) * 10;
+            digitPlaceValues["Hundreds"] = ((inputNumber / 100) % 10) * 100;
+            digitPlaceValues["Thousands"] = ((inputNumber / 1000) % 10) * 1000;
+            return digitPlaceValues;
         }
         
        
