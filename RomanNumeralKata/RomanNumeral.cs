@@ -8,7 +8,12 @@ namespace RomanNumeralKata
 {
     public class RomanNumeral
     {
-        private Dictionary<string, int> RomanNumeralDictionary 
+        private static int _midPointSymbolValue { get; set; }
+        private static string _midPointSymbol { get; set; }
+        private static string _unitSymbol { get; set; }
+        private static int _multiplier { get; set; }
+        
+        private readonly Dictionary<string, int> RomanNumeralDictionary 
         = new Dictionary<string, int>
         {
             {"I", 1},
@@ -29,8 +34,7 @@ namespace RomanNumeralKata
      
         public string TranslateIntToRomanNumeral(int inputNumber)
         {
-
-            List<string> romanOutput = new List<string>();
+            var romanOutput = new List<string>();
             var digitPlaceValues = SeparatingInputToPlaceValues(inputNumber);
             
             foreach (var digitPlaceValue in digitPlaceValues)
@@ -41,12 +45,13 @@ namespace RomanNumeralKata
                 }
                 else
                 {
-                    romanOutput.Add(SetRomanNumeralForRegularNumbers(digitPlaceValue));
+                    SetRomanNumeralForRegularNumbers(digitPlaceValue);
+                    romanOutput.Add(GenerateRomanOutput(digitPlaceValue));
                 }
             }
 
             romanOutput.Reverse();
-            var symbolOutput = String.Join("", romanOutput);
+            var symbolOutput = string.Join("", romanOutput);
             return symbolOutput;
         }
         
@@ -55,63 +60,60 @@ namespace RomanNumeralKata
             return FindRomanNumeralFromInput(inputNumber) != null;
         }
         
-        private string SetRomanNumeralForRegularNumbers(KeyValuePair<string, int> numberEntry)
+        private static void SetRomanNumeralForRegularNumbers(KeyValuePair<string, int> numberEntry)
         {
-            var midPointSymbolValue = 5;
-            var midPointSymbol = "V";
-            var unitSymbol = "I";
-            var multiplier = 1;
+            _midPointSymbolValue = 5;
+            _midPointSymbol = "V";
+            _unitSymbol = "I";
+            _multiplier = 1;
 
             if (numberEntry.Key == "Tens")
             {
-                multiplier = 10;
-                midPointSymbolValue = 50;
-                midPointSymbol = "L";
-                unitSymbol = "X";
+                _multiplier = 10;
+                _midPointSymbolValue = 50;
+                _midPointSymbol = "L";
+                _unitSymbol = "X";
             }
             else if (numberEntry.Key == "Hundreds")
             {
-                multiplier = 100;
-                midPointSymbolValue = 500;
-                midPointSymbol = "D";
-                unitSymbol = "C";
+                _multiplier = 100;
+                _midPointSymbolValue = 500;
+                _midPointSymbol = "D";
+                _unitSymbol = "C";
             }
             else if (numberEntry.Key == "Thousands")
             {
-                multiplier = 1000;
-                unitSymbol = "M";
+                _multiplier = 1000;
+                _unitSymbol = "M";
             }
-            
-            var romanOutput = GenerateRomanOutput(numberEntry, midPointSymbolValue, midPointSymbol, unitSymbol, multiplier);
-            return romanOutput;
         }
 
-        private static string GenerateRomanOutput(KeyValuePair<string, int> numberEntry, int midPointSymbolValue, string romanDictionaryKey,
-            string unitSymbol, int multiplier)
+        private static string GenerateRomanOutput(KeyValuePair<string, int> numberEntry)
         {
-            string romanOutput = numberEntry.Value > midPointSymbolValue ? romanDictionaryKey : "";
+            var romanOutput = numberEntry.Value > _midPointSymbolValue ? _midPointSymbol : "";
             
-            var modulusRemainder = (numberEntry.Value % midPointSymbolValue) / multiplier;
+            var modulusRemainder = (numberEntry.Value % _midPointSymbolValue) / _multiplier;
             for (int i = 0; i < modulusRemainder; i++)
             {
-                romanOutput += unitSymbol;
+                romanOutput += _unitSymbol;
             }
 
             return romanOutput;
         }
         
 
-        private Dictionary<string, int> SeparatingInputToPlaceValues(int inputNumber)
+        private static Dictionary<string, int> SeparatingInputToPlaceValues(int inputNumber)
         {
-            var digitPlaceValues = new Dictionary<string, int>();
-            digitPlaceValues["Ones"] = (inputNumber / 1) % 10;
-            digitPlaceValues["Tens"] = ((inputNumber / 10) % 10) * 10;
-            digitPlaceValues["Hundreds"] = ((inputNumber / 100) % 10) * 100;
-            digitPlaceValues["Thousands"] = ((inputNumber / 1000) % 10) * 1000;
+            var digitPlaceValues = new Dictionary<string, int>
+            {
+                ["Ones"] = (inputNumber / 1) % 10,
+                ["Tens"] = ((inputNumber / 10) % 10) * 10,
+                ["Hundreds"] = ((inputNumber / 100) % 10) * 100,
+                ["Thousands"] = ((inputNumber / 1000) % 10) * 1000
+            };
             return digitPlaceValues;
         }
         
-       
         private string FindRomanNumeralFromInput(int inputNumber)
         {
             return RomanNumeralDictionary.FirstOrDefault(x => x.Value == inputNumber).Key;
