@@ -8,10 +8,10 @@ namespace RomanNumeralKata
 {
     public class RomanNumeral
     {
-        private static int _midPointSymbolValue { get; set; }
-        private static string _midPointSymbol { get; set; }
-        private static string _unitSymbol { get; set; }
         private static int _multiplier { get; set; }
+        private static string _midPointSymbol { get; set; }
+        private static int _midPointSymbolValue { get; set; }
+        private static string _unitSymbol { get; set; }
         
         private readonly Dictionary<string, int> RomanNumeralDictionary 
         = new Dictionary<string, int>
@@ -31,63 +31,66 @@ namespace RomanNumeralKata
             {"M", 1000},
            
         };
-     
-        public string TranslateIntToRomanNumeral(int inputNumber)
+        
+        private static Dictionary<string, int> SeparateToExpandedNotation(int inputNumber)
         {
-            var romanOutput = new List<string>();
-            var digitPlaceValues = SeparatingInputToPlaceValues(inputNumber);
-            
-            foreach (var digitPlaceValue in digitPlaceValues)
+            var expandedNotation = new Dictionary<string, int>
             {
-                if (InputMatchesNumeral(digitPlaceValue.Value))
-                {
-                    romanOutput.Add(FindRomanNumeralFromInput(digitPlaceValue.Value));
-                }
-                else
-                {
-                    SetRomanNumeralForRegularNumbers(digitPlaceValue);
-                    romanOutput.Add(GenerateRomanOutput(digitPlaceValue));
-                }
-            }
-
-            romanOutput.Reverse();
-            var symbolOutput = string.Join("", romanOutput);
-            return symbolOutput;
+                ["Ones"] = (inputNumber / 1) % 10,
+                ["Tens"] = ((inputNumber / 10) % 10) * 10,
+                ["Hundreds"] = ((inputNumber / 100) % 10) * 100,
+                ["Thousands"] = ((inputNumber / 1000) % 10) * 1000
+            };
+            return expandedNotation;
         }
         
-        private bool InputMatchesNumeral(int inputNumber)
+        private static void SetRomanNumeralForRegularNumbers(KeyValuePair<string, int> expandedNotation)
         {
-            return FindRomanNumeralFromInput(inputNumber) != null;
-        }
-        
-        private static void SetRomanNumeralForRegularNumbers(KeyValuePair<string, int> numberEntry)
-        {
-            _midPointSymbolValue = 5;
-            _midPointSymbol = "V";
-            _unitSymbol = "I";
             _multiplier = 1;
+            _midPointSymbolValue = 5;
+            _unitSymbol = "I";
+            _midPointSymbol = "V";
 
-            if (numberEntry.Key == "Tens")
+            if (expandedNotation.Key == "Tens")
             {
                 _multiplier = 10;
                 _midPointSymbolValue = 50;
-                _midPointSymbol = "L";
                 _unitSymbol = "X";
+                _midPointSymbol = "L";
             }
-            else if (numberEntry.Key == "Hundreds")
+            else if (expandedNotation.Key == "Hundreds")
             {
                 _multiplier = 100;
                 _midPointSymbolValue = 500;
-                _midPointSymbol = "D";
                 _unitSymbol = "C";
+                _midPointSymbol = "D";
             }
-            else if (numberEntry.Key == "Thousands")
+            else if (expandedNotation.Key == "Thousands")
             {
                 _multiplier = 1000;
                 _unitSymbol = "M";
             }
         }
 
+     
+        public string TranslateNumberToRomanNumeral(int inputNumber)
+        {
+            var romanOutput = new List<string>();
+            foreach (var expandedNotation in SeparateToExpandedNotation(inputNumber))
+            {
+                if (InputMatchesNumeral(expandedNotation.Value))
+                {
+                    romanOutput.Add(FindRomanNumeralForDigit(expandedNotation.Value));
+                }
+                else
+                {
+                    SetRomanNumeralForRegularNumbers(expandedNotation);
+                    romanOutput.Add(GenerateRomanOutput(expandedNotation));
+                }
+            }
+            romanOutput.Reverse();
+            return string.Join("", romanOutput);
+        }
         private static string GenerateRomanOutput(KeyValuePair<string, int> numberEntry)
         {
             var romanOutput = numberEntry.Value > _midPointSymbolValue ? _midPointSymbol : "";
@@ -100,24 +103,17 @@ namespace RomanNumeralKata
 
             return romanOutput;
         }
-        
+        private bool InputMatchesNumeral(int expandedNumber)
+        {
+            return FindRomanNumeralForDigit(expandedNumber) != null;
+        }
+        private string FindRomanNumeralForDigit(int expandedNumber)
+        {
+            return RomanNumeralDictionary.FirstOrDefault(num => num.Value == expandedNumber).Key;
+        }
 
-        private static Dictionary<string, int> SeparatingInputToPlaceValues(int inputNumber)
-        {
-            var digitPlaceValues = new Dictionary<string, int>
-            {
-                ["Ones"] = (inputNumber / 1) % 10,
-                ["Tens"] = ((inputNumber / 10) % 10) * 10,
-                ["Hundreds"] = ((inputNumber / 100) % 10) * 100,
-                ["Thousands"] = ((inputNumber / 1000) % 10) * 1000
-            };
-            return digitPlaceValues;
-        }
         
-        private string FindRomanNumeralFromInput(int inputNumber)
-        {
-            return RomanNumeralDictionary.FirstOrDefault(x => x.Value == inputNumber).Key;
-        }
+        
         
     }
 }

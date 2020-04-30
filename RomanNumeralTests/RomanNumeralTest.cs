@@ -18,9 +18,9 @@ namespace RomanNumeralTests
             RomanNumeral romanNumeral = new RomanNumeral();
 
             //Then
-            Assert.AreEqual("I", romanNumeral.TranslateIntToRomanNumeral(1));
-            Assert.AreEqual("II", romanNumeral.TranslateIntToRomanNumeral(2));
-            Assert.AreEqual("III", romanNumeral.TranslateIntToRomanNumeral(3));
+            Assert.AreEqual("I", romanNumeral.TranslateNumberToRomanNumeral(1));
+            Assert.AreEqual("II", romanNumeral.TranslateNumberToRomanNumeral(2));
+            Assert.AreEqual("III", romanNumeral.TranslateNumberToRomanNumeral(3));
         }
         
         [Test]
@@ -30,7 +30,7 @@ namespace RomanNumeralTests
             RomanNumeral romanNumeral = new RomanNumeral();
 
             //Then
-            Assert.AreEqual("XXII", romanNumeral.TranslateIntToRomanNumeral(22));
+            Assert.AreEqual("XXII", romanNumeral.TranslateNumberToRomanNumeral(22));
         }
         
         [Test]
@@ -40,7 +40,7 @@ namespace RomanNumeralTests
             RomanNumeral romanNumeral = new RomanNumeral();
 
             //Then
-            Assert.AreEqual("CCXXXVII", romanNumeral.TranslateIntToRomanNumeral(237));
+            Assert.AreEqual("CCXXXVII", romanNumeral.TranslateNumberToRomanNumeral(237));
         }
         
         [Test]
@@ -53,7 +53,7 @@ namespace RomanNumeralTests
             //string result = romanNumeral.TranslateIntToRomanNumeral(1);
         
             //Then
-            Assert.AreEqual("IV", romanNumeral.TranslateIntToRomanNumeral(4));
+            Assert.AreEqual("IV", romanNumeral.TranslateNumberToRomanNumeral(4));
            
         }
         
@@ -63,7 +63,7 @@ namespace RomanNumeralTests
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
             // When
-            string result = romanNumeral.TranslateIntToRomanNumeral(5);
+            string result = romanNumeral.TranslateNumberToRomanNumeral(5);
             // Then
             Assert.AreEqual("V", result);
         }
@@ -76,9 +76,9 @@ namespace RomanNumeralTests
             
         
             //Then
-            Assert.AreEqual("VI", romanNumeral.TranslateIntToRomanNumeral(6));
-            Assert.AreEqual("VII", romanNumeral.TranslateIntToRomanNumeral(7));
-            Assert.AreEqual("VIII", romanNumeral.TranslateIntToRomanNumeral(8));
+            Assert.AreEqual("VI", romanNumeral.TranslateNumberToRomanNumeral(6));
+            Assert.AreEqual("VII", romanNumeral.TranslateNumberToRomanNumeral(7));
+            Assert.AreEqual("VIII", romanNumeral.TranslateNumberToRomanNumeral(8));
         }
         
         [Test]
@@ -87,7 +87,7 @@ namespace RomanNumeralTests
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
             // When
-            string result = romanNumeral.TranslateIntToRomanNumeral(9);
+            string result = romanNumeral.TranslateNumberToRomanNumeral(9);
             // Then
             Assert.AreEqual("IX", result);
         }
@@ -98,7 +98,7 @@ namespace RomanNumeralTests
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
             // When
-            string result = romanNumeral.TranslateIntToRomanNumeral(10);
+            string result = romanNumeral.TranslateNumberToRomanNumeral(10);
             // Then
             Assert.AreEqual("X", result);
         }
@@ -108,7 +108,7 @@ namespace RomanNumeralTests
         {
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
-            string result = romanNumeral.TranslateIntToRomanNumeral(11);
+            string result = romanNumeral.TranslateNumberToRomanNumeral(11);
             // Then
             Assert.AreEqual("XI", result);
         }
@@ -118,7 +118,7 @@ namespace RomanNumeralTests
         {
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
-            string result = romanNumeral.TranslateIntToRomanNumeral(13);
+            string result = romanNumeral.TranslateNumberToRomanNumeral(13);
             // Then
             Assert.AreEqual("XIII", result);
         }
@@ -128,7 +128,7 @@ namespace RomanNumeralTests
         {
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
-            string result = romanNumeral.TranslateIntToRomanNumeral(19);
+            string result = romanNumeral.TranslateNumberToRomanNumeral(19);
             // Then
             Assert.AreEqual("XIX", result);
         }
@@ -138,7 +138,7 @@ namespace RomanNumeralTests
         {
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
-            string result = romanNumeral.TranslateIntToRomanNumeral(37);
+            string result = romanNumeral.TranslateNumberToRomanNumeral(37);
             // Then
             Assert.AreEqual("XXXVII", result);
         }
@@ -148,7 +148,7 @@ namespace RomanNumeralTests
         {
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
-            string result = romanNumeral.TranslateIntToRomanNumeral(42);
+            string result = romanNumeral.TranslateNumberToRomanNumeral(42);
             // Then
             Assert.AreEqual("XLII", result);
         }
@@ -158,7 +158,7 @@ namespace RomanNumeralTests
         {
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
-            string result = romanNumeral.TranslateIntToRomanNumeral(986);
+            string result = romanNumeral.TranslateNumberToRomanNumeral(986);
             // Then
             Assert.AreEqual("CMLXXXVI", result);
         }
@@ -168,7 +168,7 @@ namespace RomanNumeralTests
         {
             // Given
             RomanNumeral romanNumeral = new RomanNumeral();
-            string result = romanNumeral.TranslateIntToRomanNumeral(1404);
+            string result = romanNumeral.TranslateNumberToRomanNumeral(1404);
             // Then
             Assert.AreEqual("MCDIV", result);
         }
