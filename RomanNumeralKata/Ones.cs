@@ -1,13 +1,12 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace RomanNumeralKata
 {
-    public class Ones : PlaceValues
+    public class Ones : IPlaceValues
     {
-        public Ones()
-        {
-            Multiplier = 1;
-            MidPointSymbolValue = 5;
-            UnitSymbol = "I";
-            MidPointSymbol = "V";
-        }
+        public int Multiplier => 1;
+        public int MidPointSymbolValue => 5;
+        public string UnitSymbol => "I";
+        public string MidPointSymbol => "V";
     }
 }

@@ -22,10 +22,9 @@ namespace RomanNumeralKata
             {"CD", 400},
             {"D", 500},
             {"CM", 900},
-            {"M", 1000},
-           
+            {"M", 1000}
         };
-        
+
         private static Dictionary<string, int> SeparateToExpandedNotation(int inputNumber)
         {
             var expandedNotation = new Dictionary<string, int>
@@ -38,11 +37,10 @@ namespace RomanNumeralKata
             return expandedNotation;
         }
 
-
-        public static PlaceValues SetPlaceValues(KeyValuePair<string, int> expandedNotation)
+        private static IPlaceValues SetPlaceValues(KeyValuePair<string, int> expandedNotation)
         {
-            PlaceValues placeValues = null;
-            placeValues = new Ones();
+            IPlaceValues placeValues = new Ones();
+            
             if (expandedNotation.Key == "Tens")
             {
                 placeValues = new Tens();
@@ -57,9 +55,11 @@ namespace RomanNumeralKata
             }
             return placeValues;
         }
+        
         public string TranslateNumberToRomanNumeral(int inputNumber)
         {
             var romanOutput = new List<string>();
+            
             foreach (var expandedNotation in SeparateToExpandedNotation(inputNumber))
             {
                 if (InputMatchesNumeral(expandedNotation.Value))
@@ -74,6 +74,7 @@ namespace RomanNumeralKata
             romanOutput.Reverse();
             return string.Join("", romanOutput);
         }
+        
         private static string GenerateRomanOutput(KeyValuePair<string, int> numberEntry)
         {
             var placeValues = SetPlaceValues(numberEntry);
@@ -85,6 +86,7 @@ namespace RomanNumeralKata
             }
             return romanOutput;
         }
+        
         private bool InputMatchesNumeral(int expandedNumber)
         {
             return FindRomanNumeralForDigit(expandedNumber) != null;

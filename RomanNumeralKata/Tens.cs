@@ -1,13 +1,12 @@
 namespace RomanNumeralKata
 {
-    public class Tens : PlaceValues
+    public class Tens : IPlaceValues
     {
-        public Tens()
-        {
-            Multiplier = 10;
-            MidPointSymbolValue = 50;
-            UnitSymbol = "X";
-            MidPointSymbol = "L";
-        }
-    }
+        
+        public int Multiplier => 10;
+        public int MidPointSymbolValue => 50;
+        public string UnitSymbol => "X";
+        public string MidPointSymbol => "L";
+        
+ }
 }

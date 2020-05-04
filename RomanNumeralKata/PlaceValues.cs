@@ -1,10 +1,12 @@
 namespace RomanNumeralKata
 {
-    public class PlaceValues
+    public interface IPlaceValues
     {
-        public int Multiplier { get; set; }
-        public int MidPointSymbolValue { get; set; }
-        public string UnitSymbol { get; set; }
-        public string MidPointSymbol { get; set; }
+        public int Multiplier { get; }
+        public int MidPointSymbolValue { get; }
+        public string UnitSymbol { get; }
+        public string MidPointSymbol { get; }
+        
+        
     }
 }

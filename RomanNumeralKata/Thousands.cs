@@ -1,11 +1,10 @@
 namespace RomanNumeralKata
 {
-    public class Thousands : PlaceValues
+    public class Thousands : IPlaceValues
     {
-        public Thousands()
-        {
-            Multiplier = 1000;
-            UnitSymbol = "X";
-        }
+         public int Multiplier => 1000;
+        public int MidPointSymbolValue => 1000;
+        public string UnitSymbol => "M";
+        public string MidPointSymbol => "";
     }
 }
